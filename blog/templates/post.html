@@ -1,0 +1,27 @@
+{% extends "base.html" %} 
+{% load static %}
+
+{% block "content" %}
+<div class="container pt-3">
+    <div class="row">
+        <div class="col">
+            <div class="cover-container">
+                <div class="cover-container__inner">
+                    <img src="{% get_media_prefix %}{{post.image}}" class="cover-image">
+                </div>
+            </div>
+            <div class="pt-3">
+                <h1>{{ post.title }}</h1>
+                <p><small>{{ post.created|date:"F d, Y" }}</small></p>
+                <p>
+                    {{ post.body }}
+                </p>
+                {% if user.is_staff %}
+                <a class="btn btn-primary" href="{% url 'post_edit' post.id %}">Editar</a>
+                <a class="btn btn-danger" href="{% url 'post_delete' post.id %}">Eliminar</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock "content" %}
